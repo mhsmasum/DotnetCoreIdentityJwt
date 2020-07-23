@@ -1,0 +1,72 @@
+
+<div class="row container">
+<div class="col-3 form-inline">
+    <div class="form-group mb-2">
+        <label>Order Amount:</label>
+        <input type="number" class="form-control" disabled value="{{theOrder.OrderAmount}}" >
+    </div>
+</div>
+<br>
+<hr>
+</div>
+<div class="row">
+    <div class="col-3 " >
+        <div class="form-group">
+        <label>Product</label>
+        <select class="form-control" (change)="onProductChange($event)">
+            <option value="0">-- Select Product --</option>
+            <option *ngFor="let product of procuctList"  value="{{product.id}}">{{product.name}}</option>
+        </select>
+        </div>
+    </div>
+    <div class="col-2 " >
+       <div class="form-group">
+        <label>Price:</label>
+        <input class="form-control text-right" value="{{selectedProduct.Price}}" disabled number="text">
+       </div>
+    </div>
+    <div class="col-2  ">
+        <div class="form-group">
+            <label>Quantity:</label>
+            <input class="form-control text-right" (change)="applyQty($event)" min="0" value="{{selectedProduct.ProductCount}}"  type="number">
+        </div>
+        
+    </div>
+    <div class="col-2 ">
+        <div class="form-group">
+            <label>Total:</label>
+            <input class="form-control text-right" value="{{selectedProduct.TotalAmount}}" disabled type="number">
+        </div>
+        
+    </div>
+    <div class="col-2">
+        <button class="btn btn-sm btn-success" (click)="addProductToList()">Add to list</button>
+    </div>
+</div>
+<br>
+<hr>
+<div *ngIf="theOrderDetails.length>0">
+    <table class="table table-bordered">
+        <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Qty</th>
+            <th>Total</th>
+            <th>Action</th>
+        </tr>
+        <tbody>
+            <tr *ngFor="let product of theOrderDetails ;let i=index;">
+                <td>{{product.Name}}</td>
+                <td>{{product.Price}}</td>
+                <td>{{product.ProductCount}}</td>
+                <td>{{product.TotalAmount}}</td>
+                <td><button class="btn btn-sm btn-danger" (click)="removeItem(product , i)" >X</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="col-12 text-right">
+    <button class="btn btn-sm btn-warning" (click) = "close()" >Cancel</button>
+    <button class="btn btn-sm btn-success" (click) = "saveOrder()" >Save Order</button>
+</div>

@@ -1,0 +1,35 @@
+<app-auth-nav></app-auth-nav>
+  
+<div class="container">
+  <div class="card m-5" style="width:18rem" *ngIf="userDetails">
+    <ul class="list-group">
+      <li class="list-group-item"><strong>Username : </strong>{{userDetails.userName}}</li>
+      <li class="list-group-item"><strong>FullName : </strong>{{userDetails.fullName}}</li>
+      <li class="list-group-item"><strong>Email : </strong>{{userDetails.email}}</li>
+    </ul>
+  </div>
+
+  <button class="btn btn-success" (click) =  "newOrder()" >Add New Order</button>
+  <table class="table table-bordered" >
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Customer</th>
+            <th>Order Item</th>
+            <th>Order Amount</th>
+            <th>Order Date</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody >
+        <tr *ngFor="let order of orderList; let i=index">
+            <td> {{i+1}} </td>
+            <td> {{order.fullName}} </td>
+            <td> {{order.orderItems}} </td>
+            <td> {{order.orderAmount}} </td>
+            <td> {{order.orderDate + 'Z' | date:'short' }} </td>
+            <td> <button class="btn btn-sm btn-info" (click)="viewOrder(order)">View</button> </td>
+        </tr>
+    </tbody>
+</table>
+</div>

@@ -1,0 +1,6 @@
+<nav class="navbar navbar-dark bg-dark">
+    <a class="navbar-brand text-white">Simple Order app</a>
+    <a [routerLink]="['/product']" routerLinkActive="router-link-active" >Product</a>
+    <a [routerLink]="['/home']" routerLinkActive="router-link-active" >Order</a>
+    <button class="btn btn-danger my-2 my-sm-0" (click)="onLogout()">Logout</button>
+</nav>

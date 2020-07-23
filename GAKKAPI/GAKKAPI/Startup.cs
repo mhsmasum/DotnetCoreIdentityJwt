@@ -50,6 +50,7 @@ namespace GAKKAPI
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddTransient<IOrderRepository, OrderRepository>();
             services.AddTransient<ISqlService, SqlService>();
+            services.AddScoped<IGRepository, Repository<AuthenticationContext>>();
 
             /// identity Config
             services.AddDefaultIdentity<ApplicationUser>()

@@ -1,0 +1,50 @@
+<app-auth-nav></app-auth-nav>
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col col-lg-4 card" >
+            <form [formGroup]="formModel" autocomplete="off" (ngSubmit)="addProduct()" >
+    
+                <input class="form-control" disabled type="text" hidden formControlName="Id">
+                <div class="form-group required">
+                    <label>Name</label>
+                    <input class="form-control" type="text" formControlName="Name">
+                   
+                </div>
+                <div class="form-group required">
+                    <label>Price</label>
+                    <input class="form-control" oninput="this.value = Math.abs(this.value)" type="number" min="0" formControlName="Price">
+                   
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-8 offset-md-2">
+                      <button type="submit" class="btn btn-lg btn-block btn-success" [disabled]="!formModel.valid">Save</button>
+                    </div>
+                  </div>
+            </form>
+        </div>
+    </div>
+    
+    
+    <table class="table table-bordered" >
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+    
+            <tr *ngFor="let product of procuctList; let i=index" >
+                <td>{{i+1}}</td>
+                <td>{{product.name}}</td>
+                <td>{{product.price}}</td>
+                <td> 
+                    <button class="btn btn-sm btn-warning" (click)="editProduct(product)" ><i class="fa fa-pencil"></i></button>
+                    | <button class="btn btn-sm btn-danger" (click)="deleteProduct(product)"><i class="fa fa-trash"></i></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

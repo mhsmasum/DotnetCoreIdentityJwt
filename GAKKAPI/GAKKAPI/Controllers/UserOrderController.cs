@@ -52,5 +52,12 @@ namespace GAKKAPI.Controllers
             string userId = User.Claims.First(c => c.Type == "UserID").Value;
             return new ObjectResult(_orderRepository.OrderListSP(userId));
         }
+
+        [Route("getorder")]
+        [HttpGet]
+        public IActionResult GetOrder(int orderId)
+        {
+            return new ObjectResult(_orderRepository.OrderById(orderId));
+        }
     }
 }

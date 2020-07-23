@@ -13,6 +13,7 @@ namespace GAKKAPI.IRepository
         List<Product> GetProducts();
 
         List<Order> OrderList(string customerId);
+        Order OrderById(int orderId);
         List<OrderVM> OrderListSP(string customerId);
     }
 }

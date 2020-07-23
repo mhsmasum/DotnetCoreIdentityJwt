@@ -2,6 +2,8 @@
 using GAKKAPI.Models;
 using GAKKAPI.ViewModel;
 using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -74,8 +76,33 @@ namespace GAKKAPI.Repository
                 _sqlConnService.CloseConnection();
             }
         }
+        public Order OrderById(int orderId)
+        {
+            try
+            {
+                var order = _dbContext.Orders.Where(ord => ord.OrderId == orderId).Include(a=>a.Customer).Include(c=>c.OrderDetails).SingleOrDefault();
 
+                var result = (from orddet in order.OrderDetails
+                              join pro in _dbContext.Products on orddet.ProductId equals pro.Id
+                              select new
+                              {
+                                   orddet,
+
+
+
+                              }).ToList();
+              
+                var order2 = (from ord in _dbContext.Orders where ord.OrderId == orderId select   ord ).SingleOrDefault();
+                return order2;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
         public bool SaveOrder(Order order , string userId)
+        
         {
             bool result = false;
             using (var transaction = _dbContext.Database.BeginTransaction())
